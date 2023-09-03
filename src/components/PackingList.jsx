@@ -5,41 +5,59 @@ import Item from "./Item";
 //   { id: 2, description: "Socks", quantity: 12, packed: false },];
 
 const PackingList = ({ items, handleDeleteItem, handleToggleItem }) => {
+  // const [sortBy, setSortBy] = useState("input");
+
   const [sortBy, setSortBy] = useState("input");
 
+  // ? DERIVED STATE
   let sortedItems;
 
   if (sortBy === "input") {
     sortedItems = items;
   }
-
   if (sortBy === "description") {
     sortedItems = items
       .slice()
       .sort((a, b) => a.description.localeCompare(b.description));
   }
-
   if (sortBy === "packed") {
     sortedItems = items
       .slice()
       .sort((a, b) => Number(a.packed) - Number(b.packed));
   }
+  // let sortedItems;
+
+  // if (sortBy === "input") {
+  //   sortedItems = items;
+  // }
+
+  // if (sortBy === "description") {
+  //   sortedItems = items
+  //     .slice()
+  //     .sort((a, b) => a.description.localeCompare(b.description));
+  // }
+
+  // if (sortBy === "packed") {
+  // sortedItems = items
+  //   .slice()
+  //   .sort((a, b) => Number(a.packed) - Number(b.packed));
+  // }
 
   return (
     <Fragment>
       <div className="list">
         <ul>
-          {sortedItems.map((item, i) => (
+          {sortedItems.map((item, i) =>
             <Item
               item={item}
               key={i}
               handleDeleteItem={handleDeleteItem}
               handleToggleItem={handleToggleItem}
             />
-          ))}
+          )}
         </ul>
         <div className="actions">
-          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
             <option value="input">Sort by input order</option>
             <option value="description">Sort by description</option>
             <option value="packed">Sort by packed status</option>
@@ -51,3 +69,16 @@ const PackingList = ({ items, handleDeleteItem, handleToggleItem }) => {
 };
 
 export default PackingList;
+// <Item
+// item={item}
+// key={i}
+// handleDeleteItem={handleDeleteItem}
+// handleToggleItem={handleToggleItem}
+// />
+// <div className="actions">
+// <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
+//   <option value="input">Sort by input order</option>
+//   <option value="description">Sort by description</option>
+//   <option value="packed">Sort by packed status</option>
+// </select>
+// </div>
